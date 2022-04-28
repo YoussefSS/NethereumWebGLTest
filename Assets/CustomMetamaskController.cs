@@ -24,6 +24,9 @@ public class CustomMetamaskController : MonoBehaviour
     private string _currentContractAddress; // = "0x32eb97b8ad202b072fd9066c03878892426320ed";
     private bool bMetamaskEnabled = false;
 
+    [SerializeField]
+    private DebugUIManager ui;
+
     void Start()
     {
 #if UNITY_WEBGL
@@ -150,6 +153,8 @@ public class CustomMetamaskController : MonoBehaviour
             MetamaskInterop.GetChainId(gameObject.name, nameof(ChainChanged), nameof(DisplayError));
             _isMetamaskInitialised = true;
             bMetamaskEnabled = true;
+            ui.SetMetamaskEnabled();
+            ui.SetConnectedWalletText(addressSelected);
         }
         NewAccountSelected(addressSelected);
 #endif
