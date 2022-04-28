@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField]
+    private CustomMetamaskController MMController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +23,7 @@ public class Item : MonoBehaviour
     {
         if(other.GetComponent<Collider>().gameObject.CompareTag("Player"))
         {
-            // Handle contract
-            Debug.Log("Handle contract");
+            StartCoroutine(MMController.MintNFT());
         }
     }
 }

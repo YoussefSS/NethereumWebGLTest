@@ -22,6 +22,7 @@ public class CustomMetamaskController : MonoBehaviour
     private bool _isMetamaskInitialised = false;
     private BigInteger _currentChainId; //444444444500;
     private string _currentContractAddress; // = "0x32eb97b8ad202b072fd9066c03878892426320ed";
+    private bool bMetamaskEnabled = false;
 
     void Start()
     {
@@ -37,15 +38,7 @@ public class CustomMetamaskController : MonoBehaviour
 #endif
     }
 
-    private void _btnViewNFTs_clicked()
-    {
-        StartCoroutine(GetAllNFTImages());
-    }
 
-    private void _btnMintNFT_clicked()
-    {
-        StartCoroutine(MintNFT());
-    }
 
     public IEnumerator MintNFT()
     {
@@ -103,7 +96,10 @@ public class CustomMetamaskController : MonoBehaviour
     {
         StartCoroutine(DeploySmartContract());
     }
-
+    private void _btnViewNFTs_clicked()
+    {
+        StartCoroutine(GetAllNFTImages());
+    }
     private IEnumerator DeploySmartContract()
     {
         if (MetamaskInterop.IsMetamaskAvailable())
@@ -145,22 +141,6 @@ public class CustomMetamaskController : MonoBehaviour
 
     }
 
-    private void MetamaskConnectButton_Clicked()
-    {
-        // _lblError.visible = false;
-#if UNITY_WEBGL
-        if (MetamaskInterop.IsMetamaskAvailable())
-        {
-            MetamaskInterop.EnableEthereum(gameObject.name, nameof(EthereumEnabled), nameof(DisplayError));
-        }
-        else
-        {
-            DisplayError("Metamask is not available, please install it");
-        }
-#endif
-
-    }
-
     public void EthereumEnabled(string addressSelected)
     {
 #if UNITY_WEBGL
@@ -169,6 +149,7 @@ public class CustomMetamaskController : MonoBehaviour
             MetamaskInterop.EthereumInit(gameObject.name, nameof(NewAccountSelected), nameof(ChainChanged));
             MetamaskInterop.GetChainId(gameObject.name, nameof(ChainChanged), nameof(DisplayError));
             _isMetamaskInitialised = true;
+            bMetamaskEnabled = true;
         }
         NewAccountSelected(addressSelected);
 #endif
@@ -244,6 +225,10 @@ public class CustomMetamaskController : MonoBehaviour
 
     }
 
+    public bool IsMetamaskEnabled()
+    {
+        return bMetamaskEnabled;
+    }
 
     // Update is called once per frame
     void Update()

@@ -6,6 +6,8 @@ public class Character : MonoBehaviour
 {
     [SerializeField]
     private float MovementSpeed;
+    [SerializeField]
+    private CustomMetamaskController MMController;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +19,21 @@ public class Character : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
-        var targetVector = new Vector3(horizontal, 0, vertical);
-
-        // Debug.Log("horizontal: " + horizontal + "vertical: " + vertical);
-
-        float speed = MovementSpeed * Time.deltaTime;
-        transform.position = transform.position + targetVector * speed;
-
+        float vertical = Input.GetAxis("Vertical");
+        if (MMController.IsMetamaskEnabled())
+        {
+            Vector3 targetVector = new Vector3(horizontal, 0, vertical);
+            float speed = MovementSpeed * Time.deltaTime;
+            transform.position = transform.position + targetVector * speed;
+        }
+        else
+        {
+            Debug.Log("UNITY: Character::Update: Metamask not enabled");
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("character collision entered");
+        Debug.Log("UNITY: character collision entered");
     }
 }

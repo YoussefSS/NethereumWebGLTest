@@ -1,5 +1,0 @@
-- Using Nethereum
-- WebGL Template
-	- In Player settings -> Resolution and Presentation -> Pick "CustomNethereumTemplate"
-	- CustomNethereumTemplate is built on the default unity WebGL template with the added nethereumUnityInstance var
-- Entry point is CustomMetamaskController.cs, where the metamask wallet is connect on Start
