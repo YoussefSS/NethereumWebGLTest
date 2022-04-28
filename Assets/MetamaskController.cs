@@ -164,7 +164,7 @@ public class MetamaskController : MonoBehaviour
     private void MetamaskConnectButton_Clicked()
     {
         _lblError.visible = false;
-//#if UNITY_WEBGL
+#if UNITY_WEBGL
         if (MetamaskInterop.IsMetamaskAvailable())
         {
             MetamaskInterop.EnableEthereum(gameObject.name, nameof(EthereumEnabled), nameof(DisplayError));
@@ -173,13 +173,13 @@ public class MetamaskController : MonoBehaviour
         {
             DisplayError("Metamask is not available, please install it");
         }
-//#endif
+#endif
 
     }
 
     public void EthereumEnabled(string addressSelected)
     {
-//#if UNITY_WEBGL
+#if UNITY_WEBGL
         if (!_isMetamaskInitialised)
         {
             MetamaskInterop.EthereumInit(gameObject.name, nameof(NewAccountSelected), nameof(ChainChanged));
@@ -187,7 +187,7 @@ public class MetamaskController : MonoBehaviour
             _isMetamaskInitialised = true;
         }
         NewAccountSelected(addressSelected);
-//#endif
+#endif
     }
 
     public void ChainChanged(string chainId)
