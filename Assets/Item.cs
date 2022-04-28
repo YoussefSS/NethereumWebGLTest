@@ -7,6 +7,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     private CustomMetamaskController MMController;
 
+    [SerializeField]
+    private bool bNFT = true;
+    [SerializeField]
+    private bool bSmartContract = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,15 @@ public class Item : MonoBehaviour
     {
         if(other.GetComponent<Collider>().gameObject.CompareTag("Player"))
         {
-            StartCoroutine(MMController.MintNFT());
+            if(bNFT)
+            {
+                StartCoroutine(MMController.MintNFT());
+            }
+            else if(bSmartContract)
+            {
+                StartCoroutine(MMController.DeploySmartContract());
+            }
+            
         }
     }
 }

@@ -14,6 +14,12 @@ public class DebugUIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI ConnectedWallet;
 
+    [SerializeField]
+    private TextMeshProUGUI TransactionHash;
+
+    [SerializeField]
+    private TextMeshProUGUI DeployedSmartContractAddress;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +40,15 @@ public class DebugUIManager : MonoBehaviour
     public void SetConnectedWalletText(string walletAddress)
     {
         ConnectedWallet.text = walletAddress;
+    }
+
+    public void SetTransactionHash(string txnHash)
+    {
+        TransactionHash.text = txnHash;
+    }
+
+    public void SetDeployedSmartContractAddress(string address)
+    {
+        DeployedSmartContractAddress.text = address;
     }
 }

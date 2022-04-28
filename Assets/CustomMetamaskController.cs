@@ -57,7 +57,8 @@ public class CustomMetamaskController : MonoBehaviour
     public void MintedResponse(string rpcResponse)
     {
         var txnHash = MetamaskTransactionUnityRequest.DeserialiseTxnHashFromResponse(rpcResponse);
-        print(txnHash);
+        print("mint txnhash: " + txnHash);
+        ui.SetTransactionHash(txnHash);
     }
 
     public IEnumerator GetAllNFTImages()
@@ -103,7 +104,7 @@ public class CustomMetamaskController : MonoBehaviour
     {
         StartCoroutine(GetAllNFTImages());
     }
-    private IEnumerator DeploySmartContract()
+    public IEnumerator DeploySmartContract()
     {
         if (MetamaskInterop.IsMetamaskAvailable())
         {
@@ -142,6 +143,8 @@ public class CustomMetamaskController : MonoBehaviour
         //  _txtSmartContractAddress.value = deploymentReceipt.ContractAddress;
         print(_currentContractAddress);
 
+        //
+        ui.SetDeployedSmartContractAddress(_currentContractAddress);
     }
 
     public void EthereumEnabled(string addressSelected)
