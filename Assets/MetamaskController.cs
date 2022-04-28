@@ -41,16 +41,16 @@ public class MetamaskController : MonoBehaviour
 
         _btnViewNFTs = root.Q<Button>("btn-list-nfts");
         _btnMintNFT = root.Q<Button>("btn-mint-nft");
-        
+
         _lblError = root.Q<Label>("lbl-error");
 
-        _btnDeployNFTContract = root.Q<Button>("btn-deploy-nft"); 
+        _btnDeployNFTContract = root.Q<Button>("btn-deploy-nft");
         _btnMetamaskConnect.clicked += MetamaskConnectButton_Clicked;
         _btnDeployNFTContract.clicked += _btnDeployNFTContract_clicked;
         _btnMintNFT.clicked += _btnMintNFT_clicked;
         _btnViewNFTs.clicked += _btnViewNFTs_clicked;
 
-        
+
     }
 
     private void _btnViewNFTs_clicked()
